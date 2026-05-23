@@ -17,6 +17,7 @@ namespace PixMartt
         {
             InitializeComponent();
             currentUserID = userID;
+            ShowWelcomeName();
         }
 
         private void btnProfile_Click(object sender, EventArgs e)
@@ -168,6 +169,29 @@ namespace PixMartt
         private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadArtworks();
+        }
+        private void ShowWelcomeName()
+        {
+            var user = DataStore.Users.FirstOrDefault(u => u.UserID == currentUserID);
+
+            if (user != null)
+            {
+                lblWelcome.Text = "Welcome, " + user.FullName + "!";
+            }
+            else
+            {
+                lblWelcome.Text = "Welcome, User!";
+            }
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

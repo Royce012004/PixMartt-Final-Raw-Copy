@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.btnUpload = new System.Windows.Forms.Button();
             this.btnGallery = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
@@ -38,22 +38,27 @@
             this.btnClearSearch = new System.Windows.Forms.Button();
             this.btnRequests = new System.Windows.Forms.Button();
             this.cmbCategory = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblTitle
+            // lblWelcome
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(12, 26);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(97, 13);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "PixMart Dashboard";
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(12, 156);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(191, 42);
+            this.lblWelcome.TabIndex = 0;
+            this.lblWelcome.Text = "Welcome:";
+            this.lblWelcome.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // btnUpload
             // 
-            this.btnUpload.Location = new System.Drawing.Point(264, 412);
+            this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpload.Location = new System.Drawing.Point(405, 521);
             this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(113, 23);
+            this.btnUpload.Size = new System.Drawing.Size(160, 53);
             this.btnUpload.TabIndex = 1;
             this.btnUpload.Text = "Upload Artwork";
             this.btnUpload.UseVisualStyleBackColor = true;
@@ -61,9 +66,10 @@
             // 
             // btnGallery
             // 
-            this.btnGallery.Location = new System.Drawing.Point(405, 412);
+            this.btnGallery.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.btnGallery.Location = new System.Drawing.Point(208, 521);
             this.btnGallery.Name = "btnGallery";
-            this.btnGallery.Size = new System.Drawing.Size(113, 23);
+            this.btnGallery.Size = new System.Drawing.Size(170, 53);
             this.btnGallery.TabIndex = 2;
             this.btnGallery.Text = "Downloaded Gallery";
             this.btnGallery.UseVisualStyleBackColor = true;
@@ -71,7 +77,7 @@
             // 
             // btnProfile
             // 
-            this.btnProfile.Location = new System.Drawing.Point(675, 29);
+            this.btnProfile.Location = new System.Drawing.Point(675, 12);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(113, 23);
             this.btnProfile.TabIndex = 3;
@@ -83,24 +89,23 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 66);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 254);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 330);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 237);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(245, 29);
+            this.txtSearch.Location = new System.Drawing.Point(286, 114);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(166, 20);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.Text = "Search Bar";
-            this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(417, 27);
+            this.btnSearch.Location = new System.Drawing.Point(458, 112);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(64, 23);
             this.btnSearch.TabIndex = 7;
@@ -110,7 +115,7 @@
             // 
             // btnClearSearch
             // 
-            this.btnClearSearch.Location = new System.Drawing.Point(487, 27);
+            this.btnClearSearch.Location = new System.Drawing.Point(528, 112);
             this.btnClearSearch.Name = "btnClearSearch";
             this.btnClearSearch.Size = new System.Drawing.Size(46, 23);
             this.btnClearSearch.TabIndex = 8;
@@ -120,9 +125,9 @@
             // 
             // btnRequests
             // 
-            this.btnRequests.Location = new System.Drawing.Point(610, 27);
+            this.btnRequests.Location = new System.Drawing.Point(606, 12);
             this.btnRequests.Name = "btnRequests";
-            this.btnRequests.Size = new System.Drawing.Size(59, 23);
+            this.btnRequests.Size = new System.Drawing.Size(63, 23);
             this.btnRequests.TabIndex = 9;
             this.btnRequests.Text = "Requests";
             this.btnRequests.UseVisualStyleBackColor = true;
@@ -136,17 +141,30 @@
             "Digital Art",
             "Photography",
             "Abstract"});
-            this.cmbCategory.Location = new System.Drawing.Point(141, 29);
+            this.cmbCategory.Location = new System.Drawing.Point(182, 114);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(98, 21);
             this.cmbCategory.TabIndex = 14;
             this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PixMartt.Properties.Resources.Logo;
+            this.pictureBox1.InitialImage = global::PixMartt.Properties.Resources.Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(218, 28);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(315, 78);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 456);
+            this.ClientSize = new System.Drawing.Size(800, 604);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cmbCategory);
             this.Controls.Add(this.btnRequests);
             this.Controls.Add(this.btnClearSearch);
@@ -156,10 +174,11 @@
             this.Controls.Add(this.btnProfile);
             this.Controls.Add(this.btnGallery);
             this.Controls.Add(this.btnUpload);
-            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.lblWelcome);
             this.Name = "DashboardForm";
             this.Text = "DashboardForm";
             this.Load += new System.EventHandler(this.DashboardForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,7 +186,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Button btnGallery;
         private System.Windows.Forms.Button btnProfile;
@@ -177,5 +196,6 @@
         private System.Windows.Forms.Button btnClearSearch;
         private System.Windows.Forms.Button btnRequests;
         private System.Windows.Forms.ComboBox cmbCategory;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

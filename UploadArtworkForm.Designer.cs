@@ -77,9 +77,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(375, 25);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label1.Location = new System.Drawing.Point(298, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(123, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Upload Artwork";
             // 
@@ -165,7 +166,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 364);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.ClientSize = new System.Drawing.Size(695, 349);
             this.Controls.Add(this.cmbCategory);
             this.Controls.Add(this.price);
             this.Controls.Add(this.txtprice);
@@ -179,7 +181,9 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnBrowse);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "UploadArtworkForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UploadArtworkForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArtwork)).EndInit();
             this.ResumeLayout(false);
