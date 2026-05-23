@@ -1,0 +1,181 @@
+﻿namespace PixMartt
+{
+    partial class DashboardForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.btnUpload = new System.Windows.Forms.Button();
+            this.btnGallery = new System.Windows.Forms.Button();
+            this.btnProfile = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnClearSearch = new System.Windows.Forms.Button();
+            this.btnRequests = new System.Windows.Forms.Button();
+            this.cmbCategory = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Location = new System.Drawing.Point(12, 26);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(97, 13);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "PixMart Dashboard";
+            // 
+            // btnUpload
+            // 
+            this.btnUpload.Location = new System.Drawing.Point(264, 412);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(113, 23);
+            this.btnUpload.TabIndex = 1;
+            this.btnUpload.Text = "Upload Artwork";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
+            // btnGallery
+            // 
+            this.btnGallery.Location = new System.Drawing.Point(405, 412);
+            this.btnGallery.Name = "btnGallery";
+            this.btnGallery.Size = new System.Drawing.Size(113, 23);
+            this.btnGallery.TabIndex = 2;
+            this.btnGallery.Text = "Downloaded Gallery";
+            this.btnGallery.UseVisualStyleBackColor = true;
+            this.btnGallery.Click += new System.EventHandler(this.btnGallery_Click);
+            // 
+            // btnProfile
+            // 
+            this.btnProfile.Location = new System.Drawing.Point(675, 29);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(113, 23);
+            this.btnProfile.TabIndex = 3;
+            this.btnProfile.Text = "Profile";
+            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 66);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 330);
+            this.flowLayoutPanel1.TabIndex = 5;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(245, 29);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(166, 20);
+            this.txtSearch.TabIndex = 6;
+            this.txtSearch.Text = "Search Bar";
+            this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(417, 27);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(64, 23);
+            this.btnSearch.TabIndex = 7;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnClearSearch
+            // 
+            this.btnClearSearch.Location = new System.Drawing.Point(487, 27);
+            this.btnClearSearch.Name = "btnClearSearch";
+            this.btnClearSearch.Size = new System.Drawing.Size(46, 23);
+            this.btnClearSearch.TabIndex = 8;
+            this.btnClearSearch.Text = "Clear";
+            this.btnClearSearch.UseVisualStyleBackColor = true;
+            this.btnClearSearch.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnRequests
+            // 
+            this.btnRequests.Location = new System.Drawing.Point(610, 27);
+            this.btnRequests.Name = "btnRequests";
+            this.btnRequests.Size = new System.Drawing.Size(59, 23);
+            this.btnRequests.TabIndex = 9;
+            this.btnRequests.Text = "Requests";
+            this.btnRequests.UseVisualStyleBackColor = true;
+            this.btnRequests.Click += new System.EventHandler(this.btnRequests_Click);
+            // 
+            // cmbCategory
+            // 
+            this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.Items.AddRange(new object[] {
+            "Digital Art",
+            "Photography",
+            "Abstract"});
+            this.cmbCategory.Location = new System.Drawing.Point(141, 29);
+            this.cmbCategory.Name = "cmbCategory";
+            this.cmbCategory.Size = new System.Drawing.Size(98, 21);
+            this.cmbCategory.TabIndex = 14;
+            this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
+            // 
+            // DashboardForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 456);
+            this.Controls.Add(this.cmbCategory);
+            this.Controls.Add(this.btnRequests);
+            this.Controls.Add(this.btnClearSearch);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.btnProfile);
+            this.Controls.Add(this.btnGallery);
+            this.Controls.Add(this.btnUpload);
+            this.Controls.Add(this.lblTitle);
+            this.Name = "DashboardForm";
+            this.Text = "DashboardForm";
+            this.Load += new System.EventHandler(this.DashboardForm_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnGallery;
+        private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnClearSearch;
+        private System.Windows.Forms.Button btnRequests;
+        private System.Windows.Forms.ComboBox cmbCategory;
+    }
+}
