@@ -44,9 +44,13 @@
             // 
             // lblWelcome
             // 
+            this.lblWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWelcome.AutoSize = true;
+            this.lblWelcome.BackColor = System.Drawing.Color.Transparent;
             this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(12, 156);
+            this.lblWelcome.Location = new System.Drawing.Point(12, 152);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(191, 42);
             this.lblWelcome.TabIndex = 0;
@@ -55,8 +59,8 @@
             // 
             // btnUpload
             // 
-            this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpload.Location = new System.Drawing.Point(405, 521);
+            this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.btnUpload.Location = new System.Drawing.Point(439, 521);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(160, 53);
             this.btnUpload.TabIndex = 1;
@@ -66,10 +70,12 @@
             // 
             // btnGallery
             // 
-            this.btnGallery.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.btnGallery.FlatAppearance.BorderSize = 4;
+            this.btnGallery.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.btnGallery.Location = new System.Drawing.Point(208, 521);
+            this.btnGallery.Margin = new System.Windows.Forms.Padding(0);
             this.btnGallery.Name = "btnGallery";
-            this.btnGallery.Size = new System.Drawing.Size(170, 53);
+            this.btnGallery.Size = new System.Drawing.Size(215, 53);
             this.btnGallery.TabIndex = 2;
             this.btnGallery.Text = "Downloaded Gallery";
             this.btnGallery.UseVisualStyleBackColor = true;
@@ -77,21 +83,22 @@
             // 
             // btnProfile
             // 
+            this.btnProfile.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProfile.Location = new System.Drawing.Point(675, 12);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(113, 23);
             this.btnProfile.TabIndex = 3;
             this.btnProfile.Text = "Profile";
-            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.UseVisualStyleBackColor = false;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 254);
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 222);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 237);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 269);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // txtSearch
@@ -125,12 +132,14 @@
             // 
             // btnRequests
             // 
+            this.btnRequests.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRequests.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnRequests.Location = new System.Drawing.Point(606, 12);
             this.btnRequests.Name = "btnRequests";
             this.btnRequests.Size = new System.Drawing.Size(63, 23);
             this.btnRequests.TabIndex = 9;
             this.btnRequests.Text = "Requests";
-            this.btnRequests.UseVisualStyleBackColor = true;
+            this.btnRequests.UseVisualStyleBackColor = false;
             this.btnRequests.Click += new System.EventHandler(this.btnRequests_Click);
             // 
             // cmbCategory
@@ -149,8 +158,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::PixMartt.Properties.Resources.Logo;
-            this.pictureBox1.InitialImage = global::PixMartt.Properties.Resources.Logo;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::PixMartt.Properties.Resources.Logo;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(218, 28);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(315, 78);
@@ -163,6 +173,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::PixMartt.Properties.Resources.DashboardBG;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 604);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cmbCategory);
@@ -175,7 +187,9 @@
             this.Controls.Add(this.btnGallery);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.lblWelcome);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DashboardForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DashboardForm";
             this.Load += new System.EventHandler(this.DashboardForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
