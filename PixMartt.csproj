@@ -185,6 +185,7 @@
     <Content Include="Images\DashboardBG.jpg" />
     <Content Include="Images\loginimage.jpg" />
     <Content Include="Images\Logo.png" />
+    <None Include="Resources\RegisterPage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
