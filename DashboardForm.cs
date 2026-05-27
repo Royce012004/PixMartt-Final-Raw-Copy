@@ -237,5 +237,12 @@ namespace PixMartt
         {
 
         }
+
+        private void BtnNotification_Click(object sender, EventArgs e)
+        {
+            Notification notifForm = new Notification(currentUserID);
+            notifForm.Show();
+            this.Hide();
+        }
     }
 }
