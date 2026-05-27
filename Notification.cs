@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace PixMartt
 {
@@ -45,6 +46,14 @@ namespace PixMartt
                 return;
             }
 
+            flowLayoutPanelNotifications.Controls.Clear();
+
+            flowLayoutPanelNotifications.AutoScroll = true;
+            flowLayoutPanelNotifications.WrapContents = true;
+            flowLayoutPanelNotifications.FlowDirection = FlowDirection.LeftToRight;
+            flowLayoutPanelNotifications.Padding = new Padding(20);
+            flowLayoutPanelNotifications.BackColor = Color.White;
+
             foreach (PurchaseRequest request in notifications)
             {
                 Artwork artwork = DataStore.Artworks
@@ -58,73 +67,127 @@ namespace PixMartt
                     continue;
                 }
 
-                Panel panel = new Panel();
-                panel.Width = 210;
-                panel.Height = 280;
-                panel.BorderStyle = BorderStyle.FixedSingle;
-                panel.BackColor = Color.White;
-                panel.Margin = new Padding(10);
+                Panel card = new Panel();
+                card.Width = 220;
+                card.Height = 320;
+                card.BackColor = Color.White;
+                card.Margin = new Padding(15);
+                card.BorderStyle = BorderStyle.None;
 
+                // Artwork image
                 PictureBox picture = new PictureBox();
-                picture.Width = 160;
-                picture.Height = 120;
+                picture.Width = 190;
+                picture.Height = 180;
+                picture.Left = 15;
                 picture.Top = 10;
-                picture.Left = 25;
                 picture.ImageLocation = artwork.ImagePath;
                 picture.SizeMode = PictureBoxSizeMode.StretchImage;
+                picture.BackColor = Color.FromArgb(220, 210, 200);
+                picture.BorderStyle = BorderStyle.None;
 
+                MakeRounded(picture, 18);
+
+                // Title
                 Label title = new Label();
-                title.Text = artwork.Title;
-                title.Top = 140;
+                title.Text = artwork.Title.ToUpper();
                 title.Left = 15;
-                title.Width = 180;
+                title.Top = 200;
+                title.Width = 190;
                 title.Height = 25;
-                title.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                title.Font = new Font("Arial", 13, FontStyle.Bold);
                 title.ForeColor = Color.Black;
 
+                // Seller
                 Label sellerName = new Label();
-                sellerName.Text = "Seller: " + (seller != null ? seller.FullName : "Unknown");
-                sellerName.Top = 165;
+                sellerName.Text = (seller != null ? seller.FullName.ToUpper() : "UNKNOWN SELLER");
                 sellerName.Left = 15;
-                sellerName.Width = 180;
-                sellerName.Height = 25;
-                sellerName.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-                sellerName.ForeColor = Color.DimGray;
+                sellerName.Top = 225;
+                sellerName.Width = 190;
+                sellerName.Height = 18;
+                sellerName.Font = new Font("Arial", 7, FontStyle.Regular);
+                sellerName.ForeColor = Color.Black;
 
+                // Price
                 Label price = new Label();
-                price.Text = "Price: ₱" + artwork.Price.ToString("0.00");
-                price.Top = 190;
+                price.Text = "₱" + artwork.Price.ToString("0.##");
                 price.Left = 15;
-                price.Width = 180;
+                price.Top = 248;
+                price.Width = 65;
                 price.Height = 25;
-                price.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-                price.ForeColor = Color.DimGray;
+                price.TextAlign = ContentAlignment.MiddleCenter;
+                price.Font = new Font("Arial", 10, FontStyle.Bold);
+                price.ForeColor = Color.White;
+                price.BackColor = Color.Gray;
 
+                MakeRounded(price, 12);
+
+                // Status
                 Label status = new Label();
-                status.Text = "Status: " + request.Status;
-                status.Top = 215;
-                status.Left = 15;
-                status.Width = 180;
+                status.Left = 95;
+                status.Top = 248;
+                status.Width = 110;
                 status.Height = 25;
-                status.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                status.TextAlign = ContentAlignment.MiddleCenter;
+                status.Font = new Font("Arial", 8, FontStyle.Bold);
+                status.ForeColor = Color.White;
+                status.Text = request.Status.ToUpper();
 
                 if (request.Status == "Accepted")
                 {
-                    status.ForeColor = Color.SeaGreen;
+                    status.BackColor = Color.SeaGreen;
                 }
                 else
                 {
-                    status.ForeColor = Color.Firebrick;
+                    status.BackColor = Color.Firebrick;
                 }
 
-                panel.Controls.Add(picture);
-                panel.Controls.Add(title);
-                panel.Controls.Add(sellerName);
-                panel.Controls.Add(price);
-                panel.Controls.Add(status);
+                MakeRounded(status, 12);
 
-                flowLayoutPanelNotifications.Controls.Add(panel);
+                // Note
+                Label note = new Label();
+                note.Left = 15;
+                note.Top = 285;
+                note.Width = 190;
+                note.Height = 35;
+                note.Font = new Font("Arial", 7, FontStyle.Italic);
+                note.ForeColor = Color.FromArgb(160, 160, 160);
+
+                if (request.Status == "Accepted")
+                {
+                    note.Text = "See your Purchase Gallery to download this artwork.";
+                }
+                else if (request.Status == "Pending")
+                {
+                    note.Text = "Please wait for the seller to accept your request.";
+                }
+                else
+                {
+                    note.Text = "This purchase request was rejected.";
+                }
+
+                card.Controls.Add(picture);
+                card.Controls.Add(title);
+                card.Controls.Add(sellerName);
+                card.Controls.Add(price);
+                card.Controls.Add(status);
+                card.Controls.Add(note);
+
+                flowLayoutPanelNotifications.Controls.Add(card);
             }
+        }
+
+        private void MakeRounded(Control control, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            Rectangle rect = new Rectangle(0, 0, control.Width, control.Height);
+
+            path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
+            path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
+            path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
+
+            path.CloseAllFigures();
+            control.Region = new Region(path);
         }
 
         private void btnBack_Click(object sender, EventArgs e)

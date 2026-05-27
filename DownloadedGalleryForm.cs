@@ -98,7 +98,7 @@ namespace PixMartt
                 btnDownloadImage.Text = "DOWNLOAD";
                 btnDownloadImage.Left = 15;
                 btnDownloadImage.Top = 265;
-                btnDownloadImage.Width = 75;
+                btnDownloadImage.Width = 95;
                 btnDownloadImage.Height = 25;
                 btnDownloadImage.BackColor = Color.Black;
                 btnDownloadImage.ForeColor = Color.White;
