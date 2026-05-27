@@ -42,60 +42,67 @@
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
-            this.lblHeader.Location = new System.Drawing.Point(341, 21);
+            this.lblHeader.Location = new System.Drawing.Point(455, 26);
+            this.lblHeader.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(117, 13);
+            this.lblHeader.Size = new System.Drawing.Size(143, 16);
             this.lblHeader.TabIndex = 0;
             this.lblHeader.Text = "Request to buy artwork";
             // 
             // pictureBoxArtwork
             // 
-            this.pictureBoxArtwork.Location = new System.Drawing.Point(57, 56);
+            this.pictureBoxArtwork.Location = new System.Drawing.Point(76, 69);
+            this.pictureBoxArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxArtwork.Name = "pictureBoxArtwork";
-            this.pictureBoxArtwork.Size = new System.Drawing.Size(292, 251);
+            this.pictureBoxArtwork.Size = new System.Drawing.Size(389, 309);
             this.pictureBoxArtwork.TabIndex = 1;
             this.pictureBoxArtwork.TabStop = false;
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(399, 67);
+            this.lblTitle.Location = new System.Drawing.Point(532, 82);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(30, 13);
+            this.lblTitle.Size = new System.Drawing.Size(36, 16);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title:";
             // 
             // lblSeller
             // 
             this.lblSeller.AutoSize = true;
-            this.lblSeller.Location = new System.Drawing.Point(399, 105);
+            this.lblSeller.Location = new System.Drawing.Point(532, 129);
+            this.lblSeller.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSeller.Name = "lblSeller";
-            this.lblSeller.Size = new System.Drawing.Size(36, 13);
+            this.lblSeller.Size = new System.Drawing.Size(45, 16);
             this.lblSeller.TabIndex = 3;
             this.lblSeller.Text = "Seller:";
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(399, 145);
+            this.lblPrice.Location = new System.Drawing.Point(532, 178);
+            this.lblPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(34, 13);
+            this.lblPrice.Size = new System.Drawing.Size(41, 16);
             this.lblPrice.TabIndex = 4;
             this.lblPrice.Text = "Price:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(399, 186);
+            this.label4.Location = new System.Drawing.Point(532, 229);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.Size = new System.Drawing.Size(0, 16);
             this.label4.TabIndex = 5;
             // 
             // btnSendRequest
             // 
-            this.btnSendRequest.Location = new System.Drawing.Point(381, 251);
+            this.btnSendRequest.Location = new System.Drawing.Point(508, 309);
+            this.btnSendRequest.Margin = new System.Windows.Forms.Padding(4);
             this.btnSendRequest.Name = "btnSendRequest";
-            this.btnSendRequest.Size = new System.Drawing.Size(122, 56);
+            this.btnSendRequest.Size = new System.Drawing.Size(163, 69);
             this.btnSendRequest.TabIndex = 6;
             this.btnSendRequest.Text = "Request To Buy";
             this.btnSendRequest.UseVisualStyleBackColor = true;
@@ -103,9 +110,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(520, 251);
+            this.btnCancel.Location = new System.Drawing.Point(693, 309);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(114, 56);
+            this.btnCancel.Size = new System.Drawing.Size(152, 69);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -113,9 +121,10 @@
             // 
             // BuyRequestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 332);
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(982, 718);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSendRequest);
             this.Controls.Add(this.label4);
@@ -124,7 +133,10 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureBoxArtwork);
             this.Controls.Add(this.lblHeader);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BuyRequestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuyRequestForm";
             this.Load += new System.EventHandler(this.BuyRequestForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArtwork)).EndInit();

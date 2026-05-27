@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrationForm));
             this.lblTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
@@ -45,107 +46,127 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(439, 31);
+            this.lblTitle.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(568, 63);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(252, 37);
+            this.lblTitle.Size = new System.Drawing.Size(315, 40);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Create Account";
+            this.lblTitle.Text = "CREATE ACCOUNT";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(397, 109);
+            this.label1.Location = new System.Drawing.Point(529, 134);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 16);
             this.label1.TabIndex = 1;
             // 
             // txtFullName
             // 
-            this.txtFullName.Location = new System.Drawing.Point(425, 102);
+            this.txtFullName.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtFullName.Location = new System.Drawing.Point(537, 134);
+            this.txtFullName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(281, 20);
+            this.txtFullName.Size = new System.Drawing.Size(373, 30);
             this.txtFullName.TabIndex = 2;
-            this.txtFullName.Text = "Full Name";
+            this.txtFullName.Text = "  Full Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(397, 147);
+            this.label2.Location = new System.Drawing.Point(529, 181);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.Size = new System.Drawing.Size(0, 16);
             this.label2.TabIndex = 3;
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(425, 140);
+            this.txtUserName.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtUserName.Location = new System.Drawing.Point(537, 192);
+            this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(281, 20);
+            this.txtUserName.Size = new System.Drawing.Size(373, 30);
             this.txtUserName.TabIndex = 4;
-            this.txtUserName.Text = "Username";
+            this.txtUserName.Text = "  Username";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(397, 186);
+            this.label3.Location = new System.Drawing.Point(529, 229);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 13);
+            this.label3.Size = new System.Drawing.Size(0, 16);
             this.label3.TabIndex = 5;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(425, 179);
+            this.txtPassword.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtPassword.Location = new System.Drawing.Point(537, 249);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(281, 20);
+            this.txtPassword.Size = new System.Drawing.Size(373, 30);
             this.txtPassword.TabIndex = 6;
             this.txtPassword.Text = "Password";
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(425, 218);
+            this.txtEmail.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEmail.Location = new System.Drawing.Point(537, 306);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(281, 20);
+            this.txtEmail.Size = new System.Drawing.Size(373, 30);
             this.txtEmail.TabIndex = 8;
-            this.txtEmail.Text = "Email";
+            this.txtEmail.Text = "  Email";
             // 
             // btnRegister
             // 
-            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btnRegister.Location = new System.Drawing.Point(456, 257);
+            this.btnRegister.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnRegister.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.btnRegister.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnRegister.Location = new System.Drawing.Point(575, 365);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(220, 43);
+            this.btnRegister.Size = new System.Drawing.Size(293, 53);
             this.btnRegister.TabIndex = 9;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Text = "GET STARTED";
+            this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(538, 404);
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("Arial", 8F);
+            this.btnBack.Location = new System.Drawing.Point(670, 446);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(62, 24);
+            this.btnBack.Size = new System.Drawing.Size(83, 30);
             this.btnBack.TabIndex = 10;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::PixMartt.Properties.Resources.RegisterPage;
-            this.pictureBox1.Location = new System.Drawing.Point(0, -2);
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(377, 453);
+            this.pictureBox1.Size = new System.Drawing.Size(465, 723);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // RegistrationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 450);
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(982, 718);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnBack);
@@ -159,7 +180,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "RegistrationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegistrationForm";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
