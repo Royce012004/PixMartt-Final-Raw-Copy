@@ -59,7 +59,7 @@
             this.btnDownload.Font = new System.Drawing.Font("Arial", 12F);
             this.btnDownload.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDownload.Location = new System.Drawing.Point(551, 548);
-            this.btnDownload.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDownload.Margin = new System.Windows.Forms.Padding(4);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(194, 59);
             this.btnDownload.TabIndex = 0;
@@ -129,7 +129,7 @@
             this.btnBack.Font = new System.Drawing.Font("Arial", 12F);
             this.btnBack.ForeColor = System.Drawing.Color.Black;
             this.btnBack.Location = new System.Drawing.Point(804, 548);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(160, 59);
             this.btnBack.TabIndex = 6;
@@ -141,7 +141,7 @@
             // 
             this.pictureBoxArtwork.BackColor = System.Drawing.Color.White;
             this.pictureBoxArtwork.Location = new System.Drawing.Point(71, 288);
-            this.pictureBoxArtwork.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxArtwork.Name = "pictureBoxArtwork";
             this.pictureBoxArtwork.Size = new System.Drawing.Size(382, 319);
             this.pictureBoxArtwork.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -324,8 +324,9 @@
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.btnDownload);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ArtworkDetailsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ArtworkDetailsForm";
             this.Load += new System.EventHandler(this.ArtworkDetailsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArtwork)).EndInit();

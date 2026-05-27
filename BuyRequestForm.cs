@@ -77,5 +77,10 @@ namespace PixMartt
             details.Show();
             this.Hide();
         }
+
+        private void lblPrice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -59,12 +59,6 @@
     <Compile Include="BuyRequestForm.Designer.cs">
       <DependentUpon>BuyRequestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CheckoutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CheckoutForm.Designer.cs">
-      <DependentUpon>CheckoutForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,23 +67,11 @@
     </Compile>
     <Compile Include="DataStore.cs" />
     <Compile Include="Download.cs" />
-    <Compile Include="DownloaddSucessForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DownloaddSucessForm.Designer.cs">
-      <DependentUpon>DownloaddSucessForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DownloadedGalleryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DownloadedGalleryForm.Designer.cs">
       <DependentUpon>DownloadedGalleryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HomeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HomeForm.Designer.cs">
-      <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -136,14 +118,8 @@
     <EmbeddedResource Include="BuyRequestForm.resx">
       <DependentUpon>BuyRequestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CheckoutForm.resx">
-      <DependentUpon>CheckoutForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DownloaddSucessForm.resx">
-      <DependentUpon>DownloaddSucessForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DownloadedGalleryForm.resx">
       <DependentUpon>DownloadedGalleryForm.cs</DependentUpon>

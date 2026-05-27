@@ -48,6 +48,7 @@ namespace PixMartt
                 {
                     btnDownload.Enabled = false;
                     btnDownload.Text = "Your Artwork";
+                    btnDownload.ForeColor = Color.White;
                 }
                 else
                 {
