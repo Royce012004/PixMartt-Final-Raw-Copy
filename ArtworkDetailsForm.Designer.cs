@@ -49,6 +49,7 @@
             this.btnClearSearch = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.BtnNotification = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArtwork)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -179,7 +180,7 @@
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(972, 23);
+            this.button1.Location = new System.Drawing.Point(973, 23);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 52);
@@ -192,7 +193,7 @@
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button2.Location = new System.Drawing.Point(914, 25);
+            this.button2.Location = new System.Drawing.Point(915, 25);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(50, 50);
@@ -297,12 +298,24 @@
             this.txtSearch.TabIndex = 28;
             this.txtSearch.Text = "  Search Bar";
             // 
+            // BtnNotification
+            // 
+            this.BtnNotification.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnNotification.BackgroundImage")));
+            this.BtnNotification.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnNotification.Location = new System.Drawing.Point(857, 26);
+            this.BtnNotification.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnNotification.Name = "BtnNotification";
+            this.BtnNotification.Size = new System.Drawing.Size(50, 49);
+            this.BtnNotification.TabIndex = 32;
+            this.BtnNotification.UseVisualStyleBackColor = true;
+            // 
             // ArtworkDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1117, 789);
+            this.Controls.Add(this.BtnNotification);
             this.Controls.Add(this.cmbCategory);
             this.Controls.Add(this.btnClearSearch);
             this.Controls.Add(this.btnSearch);
@@ -358,5 +371,6 @@
         private System.Windows.Forms.Button btnClearSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button BtnNotification;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Data.SqlClient;
 
 namespace PixMartt
 {
@@ -37,116 +38,147 @@ namespace PixMartt
             cmbCategory.Items.Add("Abstract");
             cmbCategory.SelectedIndex = 0;
 
+            ShowWelcomeName();
             LoadArtworks();
         }
         private void LoadArtworks()
         {
             flowLayoutPanel1.Controls.Clear();
 
-            var artworks = DataStore.Artworks.AsEnumerable();
-
-            if (cmbCategory.Text != "CATEGORY")
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                string selectedCategory = cmbCategory.Text;
+                conn.Open();
 
-                artworks = artworks.Where(a =>
-                    a.Category.Equals(selectedCategory, StringComparison.OrdinalIgnoreCase)
-                );
-            }
+                string query = @"SELECT ArtworkID, UserID, PostedBy, Title, Category, Description, Price, ImagePath
+                         FROM Artworks
+                         WHERE (@Category = 'CATEGORY' OR Category = @Category)
+                         AND (@Search = '' OR Title LIKE @SearchLike OR PostedBy LIKE @SearchLike OR Category LIKE @SearchLike)
+                         ORDER BY ArtworkID DESC";
 
-            foreach (Artwork artwork in artworks)
-            {
-                Panel card = new Panel();
-                card.Width = 220;
-                card.Height = 320;
-                card.BackColor = Color.White;
-                card.Margin = new Padding(15);
-                card.BorderStyle = BorderStyle.None;
-
-                // Artwork Image
-                PictureBox picture = new PictureBox();
-                picture.Width = 190;
-                picture.Height = 180;
-                picture.Left = 15;
-                picture.Top = 10;
-                picture.ImageLocation = artwork.ImagePath;
-                picture.SizeMode = PictureBoxSizeMode.StretchImage;
-                picture.BackColor = Color.FromArgb(220, 210, 200);
-                picture.BorderStyle = BorderStyle.None;
-                MakeRounded(picture, 18);
-
-                // Title
-                Label title = new Label();
-                title.Text = artwork.Title.ToUpper();
-                title.Left = 15;
-                title.Top = 200;
-                title.Width = 190;
-                title.Height = 25;
-                title.Font = new Font("Arial", 13, FontStyle.Bold);
-                title.ForeColor = Color.Black;
-
-                // Author
-                Label author = new Label();
-                author.Text = artwork.PostedBy.ToUpper();
-                author.Left = 15;
-                author.Top = 225;
-                author.Width = 190;
-                author.Height = 18;
-                author.Font = new Font("Arial", 7, FontStyle.Regular);
-                author.ForeColor = Color.Black;
-
-                // Category
-                Label category = new Label();
-                category.Text = artwork.Category.ToUpper();
-                category.Left = 15;
-                category.Top = 243;
-                category.Width = 190;
-                category.Height = 18;
-                category.Font = new Font("Arial", 7, FontStyle.Bold);
-                category.ForeColor = Color.Gray;
-
-                // Price pill
-                Label price = new Label();
-                price.Text = "₱" + artwork.Price.ToString("0.##");
-                price.Left = 15;
-                price.Top = 263;
-                price.Width = 65;
-                price.Height = 25;
-                price.TextAlign = ContentAlignment.MiddleCenter;
-                price.Font = new Font("Arial", 10, FontStyle.Bold);
-                price.ForeColor = Color.White;
-                price.BackColor = Color.Gray;
-
-                // View button
-                Button btnView = new Button();
-                btnView.Text = "VIEW";
-                btnView.Left = 95;
-                btnView.Top = 263;
-                btnView.Width = 95;
-                btnView.Height = 25;
-                btnView.BackColor = Color.Black;
-                btnView.ForeColor = Color.White;
-                btnView.FlatStyle = FlatStyle.Flat;
-                btnView.FlatAppearance.BorderSize = 0;
-                btnView.Font = new Font("Arial", 8, FontStyle.Bold);
-
-                int artworkID = artwork.ArtworkID;
-
-                btnView.Click += (s, e) =>
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    ArtworkDetailsForm details = new ArtworkDetailsForm(currentUserID, artworkID);
-                    details.Show();
-                    this.Hide();
-                };
+                    string searchText = txtSearch.Text.Trim();
 
-                card.Controls.Add(picture);
-                card.Controls.Add(title);
-                card.Controls.Add(author);
-                card.Controls.Add(category);
-                card.Controls.Add(price);
-                card.Controls.Add(btnView);
+                    if (searchText == "Search Bar")
+                    {
+                        searchText = "";
+                    }
 
-                flowLayoutPanel1.Controls.Add(card);
+                    string selectedCategory = cmbCategory.Text.Trim();
+
+                    if (selectedCategory == "" || selectedCategory == "CATEGORY")
+                    {
+                        selectedCategory = "CATEGORY";
+                    }
+
+                    cmd.Parameters.AddWithValue("@Category", selectedCategory);
+                    cmd.Parameters.AddWithValue("@Search", searchText);
+                    cmd.Parameters.AddWithValue("@SearchLike", "%" + searchText + "%");
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Artwork artwork = new Artwork
+                            {
+                                ArtworkID = Convert.ToInt32(reader["ArtworkID"]),
+                                UserID = Convert.ToInt32(reader["UserID"]),
+                                PostedBy = reader["PostedBy"].ToString(),
+                                Title = reader["Title"].ToString(),
+                                Category = reader["Category"].ToString(),
+                                Description = reader["Description"].ToString(),
+                                Price = Convert.ToDecimal(reader["Price"]),
+                                ImagePath = reader["ImagePath"].ToString()
+                            };
+
+                            Panel card = new Panel();
+                            card.Width = 220;
+                            card.Height = 320;
+                            card.BackColor = Color.White;
+                            card.Margin = new Padding(15);
+                            card.BorderStyle = BorderStyle.None;
+
+                            PictureBox picture = new PictureBox();
+                            picture.Width = 190;
+                            picture.Height = 180;
+                            picture.Left = 15;
+                            picture.Top = 10;
+                            picture.ImageLocation = artwork.ImagePath;
+                            picture.SizeMode = PictureBoxSizeMode.StretchImage;
+                            picture.BackColor = Color.FromArgb(220, 210, 200);
+                            picture.BorderStyle = BorderStyle.None;
+                            MakeRounded(picture, 18);
+
+                            Label title = new Label();
+                            title.Text = artwork.Title.ToUpper();
+                            title.Left = 15;
+                            title.Top = 200;
+                            title.Width = 190;
+                            title.Height = 25;
+                            title.Font = new Font("Arial", 13, FontStyle.Bold);
+                            title.ForeColor = Color.Black;
+
+                            Label author = new Label();
+                            author.Text = artwork.PostedBy.ToUpper();
+                            author.Left = 15;
+                            author.Top = 225;
+                            author.Width = 190;
+                            author.Height = 18;
+                            author.Font = new Font("Arial", 7, FontStyle.Regular);
+                            author.ForeColor = Color.Black;
+
+                            Label category = new Label();
+                            category.Text = artwork.Category.ToUpper();
+                            category.Left = 15;
+                            category.Top = 243;
+                            category.Width = 190;
+                            category.Height = 18;
+                            category.Font = new Font("Arial", 7, FontStyle.Bold);
+                            category.ForeColor = Color.Gray;
+
+                            Label price = new Label();
+                            price.Text = "₱" + artwork.Price.ToString("0.##");
+                            price.Left = 15;
+                            price.Top = 263;
+                            price.Width = 65;
+                            price.Height = 25;
+                            price.TextAlign = ContentAlignment.MiddleCenter;
+                            price.Font = new Font("Arial", 10, FontStyle.Bold);
+                            price.ForeColor = Color.White;
+                            price.BackColor = Color.Gray;
+
+                            Button btnView = new Button();
+                            btnView.Text = "VIEW";
+                            btnView.Left = 95;
+                            btnView.Top = 263;
+                            btnView.Width = 95;
+                            btnView.Height = 25;
+                            btnView.BackColor = Color.Black;
+                            btnView.ForeColor = Color.White;
+                            btnView.FlatStyle = FlatStyle.Flat;
+                            btnView.FlatAppearance.BorderSize = 0;
+                            btnView.Font = new Font("Arial", 8, FontStyle.Bold);
+
+                            int artworkID = artwork.ArtworkID;
+
+                            btnView.Click += (s, e) =>
+                            {
+                                ArtworkDetailsForm details = new ArtworkDetailsForm(currentUserID, artworkID);
+                                details.Show();
+                                this.Hide();
+                            };
+
+                            card.Controls.Add(picture);
+                            card.Controls.Add(title);
+                            card.Controls.Add(author);
+                            card.Controls.Add(category);
+                            card.Controls.Add(price);
+                            card.Controls.Add(btnView);
+
+                            flowLayoutPanel1.Controls.Add(card);
+                        }
+                    }
+                }
             }
         }
 
@@ -187,12 +219,6 @@ namespace PixMartt
             this.Hide(); 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            txtSearch.Clear();
-            LoadArtworks();
-        }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadArtworks();
@@ -216,24 +242,31 @@ namespace PixMartt
         }
         private void ShowWelcomeName()
         {
-            var user = DataStore.Users.FirstOrDefault(u => u.UserID == currentUserID);
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
 
-            if (user != null)
-            {
-                lblWelcome.Text = "Welcome, " + user.FullName + "!";
-            }
-            else
-            {
-                lblWelcome.Text = "Welcome, User!";
+                string query = "SELECT FullName FROM Users WHERE UserID = @UserID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", currentUserID);
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        lblWelcome.Text = "Welcome, " + result.ToString() + "!";
+                    }
+                    else
+                    {
+                        lblWelcome.Text = "Welcome, User!";
+                    }
+                }
             }
         }
 
         private void lblTitle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
@@ -243,6 +276,18 @@ namespace PixMartt
             Notification notifForm = new Notification(currentUserID);
             notifForm.Show();
             this.Hide();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = "Search Bar";
+            cmbCategory.Text = "CATEGORY";
+            LoadArtworks();
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

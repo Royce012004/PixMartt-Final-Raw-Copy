@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PixMartt
 {
@@ -19,16 +20,47 @@ namespace PixMartt
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            User newUser = new User
+            if (txtFullName.Text.Trim() == "" ||
+                txtUserName.Text.Trim() == "" ||
+                txtPassword.Text.Trim() == "" ||
+                txtEmail.Text.Trim() == "")
             {
-                UserID = DataStore.NextUserID++,
-                FullName = txtFullName.Text,
-                Username = txtUserName.Text,
-                Password = txtPassword.Text,
-                Email = txtEmail.Text
-            };
+                MessageBox.Show("Please complete all fields.");
+                return;
+            }
 
-            DataStore.Users.Add(newUser);
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+
+                string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
+
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@Username", txtUserName.Text.Trim());
+
+                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        MessageBox.Show("Username already exists.");
+                        return;
+                    }
+                }
+
+                string insertQuery = @"INSERT INTO Users (FullName, Username, Password, Email)
+                               VALUES (@FullName, @Username, @Password, @Email)";
+
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@FullName", txtFullName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Username", txtUserName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             MessageBox.Show("Account created successfully!");
 

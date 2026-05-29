@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PixMartt
 {
@@ -19,22 +20,34 @@ namespace PixMartt
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var user = DataStore.Users.FirstOrDefault(u =>
-             u.Username == txtUsername.Text &&
-             u.Password == txtPassword.Text
-         );
-
-            if (user != null)
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                MessageBox.Show("Login successful!");
+                conn.Open();
 
-                DashboardForm dashboard = new DashboardForm(user.UserID);
-                dashboard.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Invalid username or password.");
+                string query = "SELECT UserID FROM Users WHERE Username = @Username AND Password = @Password";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        int userID = Convert.ToInt32(result);
+
+                        MessageBox.Show("Login successful!");
+
+                        DashboardForm dashboard = new DashboardForm(userID);
+                        dashboard.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid username or password.");
+                    }
+                }
             }
         }
 
@@ -79,6 +92,8 @@ namespace PixMartt
         {
 
         }
+
+
     }
 }
 

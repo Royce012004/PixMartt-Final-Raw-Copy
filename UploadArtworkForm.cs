@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PixMartt
 {
@@ -27,7 +28,11 @@ namespace PixMartt
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            if (txtTitle.Text == "" || cmbCategory.Text == "" || txtDescription.Text == "" || txtprice.Text == "" || imagePath == "")
+            if (txtTitle.Text.Trim() == "" ||
+        cmbCategory.Text.Trim() == "" ||
+        txtDescription.Text.Trim() == "" ||
+        txtprice.Text.Trim() == "" ||
+        imagePath == "")
             {
                 MessageBox.Show("Please complete all fields and select an image.");
                 return;
@@ -35,27 +40,49 @@ namespace PixMartt
 
             decimal price;
 
-            if (!decimal.TryParse(txtprice.Text, out price))
+            if (!decimal.TryParse(txtprice.Text.Trim(), out price))
             {
                 MessageBox.Show("Please enter a valid price.");
                 return;
             }
 
-            var user = DataStore.Users.FirstOrDefault(u => u.UserID == currentUserID);
-
-            Artwork artwork = new Artwork
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                ArtworkID = DataStore.NextArtworkID++,
-                UserID = currentUserID,
-                PostedBy = user.FullName,
-                Title = txtTitle.Text,
-                Category = cmbCategory.Text,
-                Description = txtDescription.Text,
-                Price = decimal.TryParse(txtprice.Text, out var Price) ? price : 0,
-                ImagePath = imagePath
-            };
+                conn.Open();
 
-            DataStore.Artworks.Add(artwork);
+                string getUserQuery = "SELECT FullName FROM Users WHERE UserID = @UserID";
+                string postedBy = "";
+
+                using (SqlCommand getUserCmd = new SqlCommand(getUserQuery, conn))
+                {
+                    getUserCmd.Parameters.AddWithValue("@UserID", currentUserID);
+
+                    object result = getUserCmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        postedBy = result.ToString();
+                    }
+                }
+
+                string insertQuery = @"INSERT INTO Artworks 
+                               (UserID, PostedBy, Title, Category, Description, Price, ImagePath)
+                               VALUES 
+                               (@UserID, @PostedBy, @Title, @Category, @Description, @Price, @ImagePath)";
+
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", currentUserID);
+                    cmd.Parameters.AddWithValue("@PostedBy", postedBy);
+                    cmd.Parameters.AddWithValue("@Title", txtTitle.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Category", cmbCategory.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Description", txtDescription.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Price", price);
+                    cmd.Parameters.AddWithValue("@ImagePath", imagePath);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             MessageBox.Show("Artwork posted successfully!");
 

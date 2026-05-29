@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PixMartt
 {
@@ -25,15 +26,27 @@ namespace PixMartt
         }
         private void LoadUserDetails()
         {
-            var user = DataStore.Users.FirstOrDefault(u => u.UserID == currentUserID);
-
-            if (user != null)
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                lblFullName.Text = "Full Name: " + user.FullName;
+                conn.Open();
 
-                txtUsername.Text = user.Username;
-                txtPassword.Text = user.Password;
-                txtEmail.Text = user.Email;
+                string query = "SELECT FullName, Username, Password, Email FROM Users WHERE UserID = @UserID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", currentUserID);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            lblFullName.Text = "Full Name: " + reader["FullName"].ToString();
+                            txtUsername.Text = reader["Username"].ToString();
+                            txtPassword.Text = reader["Password"].ToString();
+                            txtEmail.Text = reader["Email"].ToString();
+                        }
+                    }
+                }
             }
         }
         private void label3_Click(object sender, EventArgs e)
@@ -67,36 +80,56 @@ namespace PixMartt
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtUsername.Text == "" || txtPassword.Text == "" || txtEmail.Text == "")
+            if (txtUsername.Text.Trim() == "" ||
+                txtPassword.Text.Trim() == "" ||
+                txtEmail.Text.Trim() == "")
             {
                 MessageBox.Show("Please complete all fields.");
                 return;
             }
 
-            var existingUser = DataStore.Users.FirstOrDefault(u =>
-                u.Username == txtUsername.Text &&
-                u.UserID != currentUserID
-            );
-
-            if (existingUser != null)
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                MessageBox.Show("Username is already taken.");
-                return;
+                conn.Open();
+
+                string checkQuery = @"SELECT COUNT(*) FROM Users 
+                              WHERE Username = @Username 
+                              AND UserID != @UserID";
+
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                    checkCmd.Parameters.AddWithValue("@UserID", currentUserID);
+
+                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        MessageBox.Show("Username is already taken.");
+                        return;
+                    }
+                }
+
+                string updateQuery = @"UPDATE Users
+                               SET Username = @Username,
+                                   Password = @Password,
+                                   Email = @Email
+                               WHERE UserID = @UserID";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@UserID", currentUserID);
+
+                    cmd.ExecuteNonQuery();
+                }
             }
 
-            var user = DataStore.Users.FirstOrDefault(u => u.UserID == currentUserID);
-
-            if (user != null)
-            {
-                user.Username = txtUsername.Text;
-                user.Password = txtPassword.Text;
-                user.Email = txtEmail.Text;
-
-                MessageBox.Show("Profile updated successfully!");
-
-                LoadUserDetails();
-                SetEditMode(false);
-            }
+            MessageBox.Show("Profile updated successfully!");
+            LoadUserDetails();
+            SetEditMode(false);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

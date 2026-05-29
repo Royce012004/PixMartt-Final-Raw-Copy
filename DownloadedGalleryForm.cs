@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 
 namespace PixMartt
 {
@@ -34,12 +36,42 @@ namespace PixMartt
         {
             flowLayoutPanel1.Controls.Clear();
 
-            var downloadedArtworks =
-                from download in DataStore.Downloads
-                join artwork in DataStore.Artworks
-                on download.ArtworkID equals artwork.ArtworkID
-                where download.UserID == currentUserID
-                select artwork;
+            List<Artwork> downloadedArtworks = new List<Artwork>();
+
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+
+                string query = @"SELECT A.ArtworkID, A.UserID, A.PostedBy, A.Title, A.Category, 
+                        A.Description, A.Price, A.ImagePath
+                 FROM Transactions T
+                 INNER JOIN Artworks A ON T.ArtworkID = A.ArtworkID
+                 WHERE T.BuyerID = @BuyerID
+                 ORDER BY T.TransactionDate DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@BuyerID", currentUserID);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            downloadedArtworks.Add(new Artwork
+                            {
+                                ArtworkID = Convert.ToInt32(reader["ArtworkID"]),
+                                UserID = Convert.ToInt32(reader["UserID"]),
+                                PostedBy = reader["PostedBy"].ToString(),
+                                Title = reader["Title"].ToString(),
+                                Category = reader["Category"].ToString(),
+                                Description = reader["Description"].ToString(),
+                                Price = Convert.ToDecimal(reader["Price"]),
+                                ImagePath = reader["ImagePath"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
 
             foreach (Artwork artwork in downloadedArtworks)
             {

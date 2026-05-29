@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PixMartt
 {
@@ -31,29 +32,44 @@ namespace PixMartt
 
         private void ArtworkDetailsForm_Load(object sender, EventArgs e)
         {
-            var artwork = DataStore.Artworks.FirstOrDefault(a => a.ArtworkID == selectedArtworkID);
-
-            if (artwork != null)
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                lblTitle.Text = artwork.Title;
-                lblPostedBy.Text = "Posted By: " + artwork.PostedBy;
-                lblCategory.Text = "Category: " + artwork.Category;
-                lblPrice.Text = "Price: ₱" + artwork.Price.ToString("0.00");
-                lblDescription.Text = artwork.Description;
+                conn.Open();
 
-                pictureBoxArtwork.ImageLocation = artwork.ImagePath;
-                pictureBoxArtwork.SizeMode = PictureBoxSizeMode.StretchImage;
+                string query = "SELECT * FROM Artworks WHERE ArtworkID = @ArtworkID";
 
-                if (artwork.UserID == currentUserID)
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    btnDownload.Enabled = false;
-                    btnDownload.Text = "Your Artwork";
-                    btnDownload.ForeColor = Color.White;
-                }
-                else
-                {
-                    btnDownload.Enabled = true;
-                    btnDownload.Text = "Request To Buy";
+                    cmd.Parameters.AddWithValue("@ArtworkID", selectedArtworkID);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int artworkUserID = Convert.ToInt32(reader["UserID"]);
+
+                            lblTitle.Text = reader["Title"].ToString();
+                            lblPostedBy.Text = "Posted By: " + reader["PostedBy"].ToString();
+                            lblCategory.Text = "Category: " + reader["Category"].ToString();
+                            lblPrice.Text = "Price: ₱" + Convert.ToDecimal(reader["Price"]).ToString("0.00");
+                            lblDescription.Text = reader["Description"].ToString();
+
+                            pictureBoxArtwork.ImageLocation = reader["ImagePath"].ToString();
+                            pictureBoxArtwork.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                            if (artworkUserID == currentUserID)
+                            {
+                                btnDownload.Enabled = false;
+                                btnDownload.Text = "Your Artwork";
+                                btnDownload.ForeColor = Color.White;
+                            }
+                            else
+                            {
+                                btnDownload.Enabled = true;
+                                btnDownload.Text = "Request To Buy";
+                            }
+                        }
+                    }
                 }
             }
         }
